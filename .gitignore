@@ -1,2 +1,8 @@
 metagenomes/
 refGenomes/
+mappingResults/
+mappingCombos.txt
+metagenomeList.txt
+refGenomeList.txt
+resultingPIDs.txt
+nohup.out
