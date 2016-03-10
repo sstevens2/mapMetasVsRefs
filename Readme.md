@@ -7,3 +7,4 @@ This pipeline calculates the coverage and ANI for each metagenome included to ea
 Directory Structure:
 | - metagenomes : directory to place (or link) all the metagenomes to include in analysis
 | - refGenomes : directory to place (or link) all the reference genomes to include in analysis
+| - scripts : directory that contains scripts for analysis
