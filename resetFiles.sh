@@ -10,3 +10,4 @@ then
 fi
 rm resultingPIDs.txt
 rm parsedPID.txt
+rm coverage.txt
