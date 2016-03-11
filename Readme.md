@@ -9,6 +9,9 @@ This pipeline calculates the coverage and ANI for each metagenome included to ea
 | - refGenomes/ : directory to place (or link) all the reference genomes to include in analysis
 | - scripts/ : directory that contains scripts for analysis
 | - mappingResults/ : directory that holds the resulting sam files from mapping
+| - runAll.sh : script that runs pipeline
+| - resetFiles.sh : script that removed intermediate files to reset the repo
+| - setup.sh : setups the directory structure to start with
 
 
 ### Setup
@@ -36,5 +39,3 @@ To reset repo use:
 ```
 Arguments (very naive and only use positionals):
 	- Optional mapping too option ('True' if you want to delete all complete .sam files)
-
-
