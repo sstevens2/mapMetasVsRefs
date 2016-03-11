@@ -6,4 +6,4 @@ metagenomeList.txt
 refGenomeList.txt
 resultingPIDs.txt
 nohup.out
-parsePID.txt
+parsedPID.txt
