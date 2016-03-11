@@ -16,7 +16,7 @@ if len(sys.argv) != 2:
 filename=sys.argv[1]
 covFileHeader='filename\ref\meta\tbaseCovSum\tAvgCov\n'
 regCovLine='{}\t{}\t{}\t{}\t{}\n'
-ref,_,meta=os.path.basename(filename).split('-')
+ref, _, meta=os.path.basename(filename).split('-')
 meta=os.path.splitext(meta)[0]
 
 if os.stat(filename).st_size == 0: #Checking to see if file is empty (which would happen if no reads recruited)
