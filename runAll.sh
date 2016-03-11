@@ -28,17 +28,9 @@ else
 	echo "Using existing mappingCombos, use reset script or delete this file and run again to remake"
 fi
 
-# Subset mapping combos for testing
-if [ ! -e testingMappingCombos.txt ]
-then
-	head -20 mappingCombos.txt > testingMappingCombos.txt
-fi
-
 # For every combination of reference and metagenome, if the output doesn't exist the mapping will run
-echo python scripts/runMapping.py testingMappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
-python scripts/runMapping.py testingMappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
-#echo python scripts/runMapping.py mappingCombos.txt ${1-'10'} ${2-'4g'}
-#python scripts/runMapping.py mappingCombos.txt ${1-'10'} ${2-'4g'}
+echo python scripts/runMapping.py mappingCombos.txt ${1-'10'} ${2-'4g'}
+python scripts/runMapping.py mappingCombos.txt ${1-'10'} ${2-'4g'}
 
 #Parsing the PID out of the results
 if [ ! -e resultingPIDs.txt ]
