@@ -11,4 +11,5 @@ with open('parsedPID.txt','w') as outfile:
         filename=os.path.basename(line.split(':')[0])
         pid=line.split('YI:f:')[1]
         ref,_,meta=filename.split('-')
+        meta=os.path.splitext(meta)[0]
         outfile.write(filename+'\t'+ref+'\t'+meta+'\t'+pid+'\n')
