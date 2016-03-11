@@ -13,6 +13,10 @@ This pipeline calculates the coverage and ANI for each metagenome included to ea
 | - resetFiles.sh : script that removed intermediate files to reset the repo
 | - setup.sh : setups the directory structure to start with
 
+### Requirements
+- Samtools
+- BBMap
+- Python 2.7.
 
 ### Setup
 To set up the directory structure run
@@ -31,6 +35,14 @@ Run all analysis using the following command:
 Arguments (very naive and only use positionals):
 	- threads = number of threads to use (default=10)
 	- memlimit = java memory limit for each mapping job (default=4g)
+Makes nice logfiles with dates like this...  
+```
+nohup bash runAll.sh thread memlimit > $(echo $(date +%Y%m%d_%H%M%S))_nohup.log 2> $(echo $(date +%Y%m%d_%H%M%S))_nohup.err &
+```
+Example w/ 20 threads and 4g memory each
+```
+nohup bash runAll.sh 20 4g > $(echo $(date +%Y%m%d_%H%M%S))_nohup.log 2> $(echo $(date +%Y%m%d_%H%M%S))_nohup.err &
+```
 
 ### Resetting files
 To reset repo use:
