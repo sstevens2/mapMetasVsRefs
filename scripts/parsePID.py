@@ -6,8 +6,9 @@ __email__ = "sstevens2@wisc.edu"
 with open('resultingPIDs.txt') as f:
     pidfile = f.read().splitlines()
 
-with open('parsePID.txt','w') as outfile:
+with open('parsedPID.txt','w') as outfile:
     for line in pidfile:
         filename=os.path.basename(line.split(':')[0])
         pid=line.split('YI:f:')[1]
-        outfile.write(filename+'\t'+pid+'\n')
+        ref,_,meta=filename.split('-')
+        outfile.write(filename+'\t'+ref+'\t'+meta+'\t'+pid+'\n')
