@@ -3,6 +3,9 @@
 import sys, os, subprocess
 from multiprocessing import Pool
 
+__author__ = "Sarah Stevens"
+__email__ = "sstevens2@wisc.edu"
+
 def usage():
 	print "Usage: runmapping.py combolist threads(int) memlimitPerjob"
 

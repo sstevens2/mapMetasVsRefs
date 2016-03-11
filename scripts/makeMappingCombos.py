@@ -1,5 +1,9 @@
 # coding: utf-8
 import os
+
+__author__ = "Sarah Stevens"
+__email__ = "sstevens2@wisc.edu"
+
 with open('refGenomeList.txt','r') as f:
     refGenList = f.read().splitlines()
     
