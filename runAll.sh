@@ -40,10 +40,10 @@ python scripts/runMapping.py testingMappingCombos.txt $bbpath ${1-'10'} ${2-'4g'
 #echo python scripts/runMapping.py mappingCombos.txt ${1-'10'} ${2-'4g'}
 #python scripts/runMapping.py mappingCombos.txt ${1-'10'} ${2-'4g'}
 
-Parsing the PID out of the results
+#Parsing the PID out of the results
 if [ ! -e resultingPIDs.txt ]
 then
-	for filename mappingResults/*.bam; do samtools view $filename | grep 'YI:f:' >> resultingPIDs.txt
+	for filename in mappingResults/*.bam; do samtools view $filename | grep 'YI:f:' >> resultingPIDs.txt; done
 else
 	echo "Using existing resultingPIDs, use reset script or delete this file and run again to remake"
 fi
@@ -58,7 +58,16 @@ fi
 
 # Getting the coverage out of the sam files and converting to sorted bam
 # Making depth files for each
-for filename in mappingResults/*.bam; do outname="${filename%.*}"; samtools depth $filename > $outname.depth; done
+for filename in mappingResults/*.bam
+do
+	outname="${filename%.*}".depth
+	if [ ! -e $outname ]
+	then
+		samtools depth $filename > $outname
+	else
+		echo "${outfile} exists use reset script or delete this file and run again to remake"
+	fi
+done
 # Write python script to parse depth files
 if [ ! -e coverage.txt ]
 then
