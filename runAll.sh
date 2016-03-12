@@ -33,20 +33,27 @@ echo python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
 python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
 
 #Parsing the PID out of the results
-if [ ! -e resultingPIDs.txt ]
-then
-	for filename in mappingResults/*.bam; do samtools view $filename | grep 'YI:f:' >> resultingPIDs.txt; done
-else
-	echo "Using existing resultingPIDs, use reset script or delete this file and run again to remake"
-fi
+for filename in mappingResults/*.bam
+do
+        outname="${filename%.*}".pid
+        if [  ! -e $outname ]
+        then
+                samtools view $filename | grep 'YI:f:' > $outname
+        else
+                echo "${outname} exists, use reset scripts or delete this file to remake"
+        fi
+done
 
-if [ ! -e parsedPID.txt ]
-then
-	python scripts/parsePID.py
-else
-	echo "Using existing parsedPIDs, use reset script or delete this file and run again to remake"
-fi
-
+for filename in mappingResults/*.pid
+do
+        outname="${filename%.*}".pidOnly
+        if [ !  $outname ] 
+        then
+                python parsePID.py $filename
+        else
+                echo "${outname} exists, use reset script or delete this file  to remake"
+        fi
+done
 
 # Getting the coverage out of the sam files and converting to sorted bam
 # Making depth files for each
@@ -57,7 +64,7 @@ do
 	then
 		samtools depth $filename > $outname
 	else
-		echo "${outfile} exists use reset script or delete this file and run again to remake"
+		echo "${outname} exists use reset script or delete this file and run again to remake"
 	fi
 done
 # Write python script to parse depth files
