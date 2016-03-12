@@ -14,7 +14,7 @@ if len(sys.argv) != 2:
 
 # Get argument
 filename=sys.argv[1]
-covFileHeader='filename\ref\meta\tbaseCovSum\tAvgCov\n'
+covFileHeader='filename\tref\tmeta\tbaseCovSum\tAvgCov\n'
 regCovLine='{}\t{}\t{}\t{}\t{}\n'
 ref, _, meta=os.path.basename(filename).split('-')
 meta=os.path.splitext(meta)[0]
