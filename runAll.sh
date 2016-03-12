@@ -54,6 +54,13 @@ do
                 echo "${outname} exists, use reset script or delete this file  to remake"
         fi
 done
+# Calculating and putting together the ANI values
+if [ ! -e ani.txt ]
+then
+        for filename in mappingResults/*.pidOnly; do python scripts/calcANIfromPID.py $filename; done
+else
+        echo "ANI file exists, use rest script or delete this file to remake"
+fi
 
 # Getting the coverage out of the sam files and converting to sorted bam
 # Making depth files for each
