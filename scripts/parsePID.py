@@ -14,7 +14,7 @@ if len(sys.argv) != 2:
 
 #Read in input
 filename=sys.argv[1]
-outname=os.splitext(filename)[0]+".pidOnly"
+outname=os.path.splitext(filename)[0]+".pidOnly"
 
 with open(filename) as f:
     pidfile = f.read().splitlines()
