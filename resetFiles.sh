@@ -12,3 +12,4 @@ rm parsedPID.txt
 rm coverage.txt
 rm ani.txt
 rm refGenomes.len
+rm metaReads.txt
