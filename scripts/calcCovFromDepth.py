@@ -17,7 +17,7 @@ filename=sys.argv[1]
 covFileHeader='filename\tref\tmeta\tbaseCovSum\tcoveredBases\ttotalBases\tAvgCov\n'
 regCovLine='{}\t{}\t{}\t{}\t{}\t{}\t{}\n'
 ref, _, meta=os.path.basename(filename).split('-')
-meta=os.path.splitext(meta)[0]
+meta=meta.split('.')[0]
 
 ## Getting genome size
 refLengths = open('refGenomes.len','r')
