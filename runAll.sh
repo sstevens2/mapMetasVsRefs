@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 #nohup ./runAll.sh threads(default=10) memlimit(default=4g) > $(echo $(date +%Y%m%d_%H%M%S))_nohup.log 2> $(echo $(date +%Y%m%d_%H%M%S))_nohup.err &
@@ -59,17 +60,27 @@ if [ ! -e ani.txt ]
 then
         for filename in mappingResults/*.pidOnly; do python scripts/calcANIfromPID.py $filename; done
 else
-        echo "ANI file exists, use rest script or delete this file to remake"
+        echo "ANI file exists, use reset script or delete this file to remake"
 fi
 
 # Getting the coverage out of the sam files and converting to sorted bam
 # Making depth files for each
 for filename in mappingResults/*.bam
 do
+        if [ ! -e $filename.sorted ] 
+        then
+                samtools sort $filename $filename.sorted
+        else
+                echo "${filename.sorted} exists, use reset script or delete to remake"
+        fi
+done
+
+for filename in mappingResults/*sorted.bam
+do
 	outname="${filename%.*}".depth
 	if [ ! -e $outname ]
 	then
-		samtools depth $filename > $outname
+		samtools depth "$filename" > "$outname"
 	else
 		echo "${outname} exists use reset script or delete this file and run again to remake"
 	fi
