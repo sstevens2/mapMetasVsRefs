@@ -37,7 +37,7 @@ python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
 for filename in mappingResults/*.bam
 do
         outname="${filename%.*}".pid
-        if [  ! -e $outname ]
+        if [  ! -e $outname ] && [[ $filename != *.sorted.bam ]]
         then
                 samtools view $filename | grep 'YI:f:' > $outname
         else
@@ -48,9 +48,9 @@ done
 for filename in mappingResults/*.pid
 do
         outname="${filename%.*}".pidOnly
-        if [ !  $outname ] 
+        if [ ! -e $outname ] 
         then
-                python parsePID.py $filename
+                python scripts/parsePID.py $filename
         else
                 echo "${outname} exists, use reset script or delete this file  to remake"
         fi
@@ -80,7 +80,7 @@ do
         then
                 samtools sort $filename $filename.sorted
         else
-                echo "${filename.sorted} exists, use reset script or delete to remake"
+                echo "${filename}.sorted exists, use reset script or delete to remake"
         fi
 done
 
