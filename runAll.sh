@@ -55,6 +55,15 @@ do
                 echo "${outname} exists, use reset script or delete this file  to remake"
         fi
 done
+
+# Getting number of reads in metagenomes
+if [ ! -e metaReads.txt ]
+then
+	for filename in metagenomes/*.fa*; do echo $filename >> metaReads.txt ; grep -c '>' $filename >> metaReads.txt; done
+else
+	echo "Using existing metaRead.txt, delete or reset to remake"
+fi
+
 # Calculating and putting together the ANI values
 if [ ! -e ani.txt ]
 then
@@ -102,6 +111,7 @@ then
 else
 	echo "Using created refGenomes.len delete or reset if you need to remake"
 fi
+
 
 # Write python script to parse depth files
 if [ ! -e coverage.txt ]

@@ -1,6 +1,6 @@
 # coding: utf-8
 import pandas as pd
-import sys, os
+import sys, os, re
 __author__ = "Sarah Stevens"
 __email__ = "sstevens2@wisc.edu"
 
@@ -14,27 +14,39 @@ if len(sys.argv) != 2:
 
 # Get argument
 filename=sys.argv[1]
-aniFileHeader='filename\tref\tmeta\thits\tANI\n'
-regANILine='{}\t{}\t{}\t{}\t{}\n'
+aniFileHeader='filename\tref\tmeta\thits\tANI\tmetaReads\tpercentMapped\n'
+regANILine='{}\t{}\t{}\t{}\t{}\t{}\t{}\n'
 ref, _, meta=os.path.basename(filename).split('-')
 meta=os.path.splitext(meta)[0]
 
+## Getting genome size
+metaReadsFile = open('metaReads.txt','r')
+metaReads = int()
+fdname=False
+outname='ani.txt'
+for line in metaReadsFile:
+	if re.search(meta, line) and fdname==False:
+		fdname=True
+	elif fdname==True:
+		metaReads=int(line)
+		fdname=False
+
 if os.stat(filename).st_size == 0: #Checking to see if file is empty (which would happen if no reads recruited)
-	if os.path.exists('ani.txt'):
+	if os.path.exists(outname):
 		# Makes a ani file if none exists or writes line to existing one.
-		with open('ani.txt','a') as outfile:
-			outfile.write(regANILine.format(filename,ref,meta,'0', 'na')) #Records ani for 0 hits
+		with open(outname,'a') as outfile:
+			outfile.write(regANILine.format(filename,ref,meta,'0', 'NA', metaReads, '0')) #Records ani for 0 hits
 	else:
-		with open('ani.txt','a') as outfile:
+		with open(outname,'a') as outfile:
 			outfile.write(aniFileHeader)
-			outfile.write(regANILine.format(filename,ref,meta,'0', 'na'))
+			outfile.write(regANILine.format(filename,ref,meta,'0', 'NA', metaReads, '0'))
 else: #if file is not empty
 	pid_df= pd.read_table(filename, header=None) #Read in file
 	# Makes a ani file if none exists or writes line to existing one.
-	if os.path.exists('ani.txt'):
-		with open('ani.txt','a') as outfile:
-			outfile.write(regANILine.format(filename,ref, meta, pid_df[3].count(), pid_df[3].mean()))
+	if os.path.exists(outname):
+		with open(outname,'a') as outfile:
+			outfile.write(regANILine.format(filename,ref, meta, pid_df[3].count(), pid_df[3].mean(), metaReads, pid_df[3].count()/float(metaReads)))
 	else:
-		with open('ani.txt','a') as outfile:
+		with open(outname,'a') as outfile:
 			outfile.write(aniFileHeader)
-			outfile.write(regANILine.format(filename,ref, meta, pid_df[3].count(), pid_df[3].mean()))
+			outfile.write(regANILine.format(filename,ref, meta, pid_df[3].count(), pid_df[3].mean(), metaReads, pid_df[3].count()/float(metaReads)))
