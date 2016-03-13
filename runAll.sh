@@ -67,7 +67,7 @@ fi
 # Making depth files for each
 for filename in mappingResults/*.bam
 do
-        if [ ! -e $filename.sorted ] 
+        if [ ! -e $filename.sorted ] && [[ $filename != *.sorted.bam ]]
         then
                 samtools sort $filename $filename.sorted
         else
@@ -85,6 +85,24 @@ do
 		echo "${outname} exists use reset script or delete this file and run again to remake"
 	fi
 done
+
+## Getting size of genomes
+for filename in refGenomes/*.fna
+do
+	if [ ! -e $filename.len ]
+	then
+		python scripts/countbasesFNA.py $filename
+	else
+		echo "Length already calculated for ${filename}"
+	fi
+done
+if [ ! -e refGenomes.len ]
+then
+	cat refGenomes/*.len > refGenomes.len
+else
+	echo "Using created refGenomes.len delete or reset if you need to remake"
+fi
+
 # Write python script to parse depth files
 if [ ! -e coverage.txt ]
 then
