@@ -40,8 +40,6 @@ do
         if [  ! -e $outname ] && [[ $filename != *.sorted.bam ]]
         then
                 samtools view $filename | grep 'YI:f:' > $outname
-        else
-                echo "${outname} exists, use reset scripts or delete this file to remake"
         fi
 done
 
@@ -51,8 +49,6 @@ do
         if [ ! -e $outname ] 
         then
                 python scripts/parsePID.py $filename
-        else
-                echo "${outname} exists, use reset script or delete this file  to remake"
         fi
 done
 
@@ -76,11 +72,9 @@ fi
 # Making depth files for each
 for filename in mappingResults/*.bam
 do
-        if [ ! -e $filename.sorted ] && [[ $filename != *.sorted.bam ]]
+        if [ ! -e $filename.sorted.bam ] && [[ $filename != *.sorted.bam ]]
         then
                 samtools sort $filename $filename.sorted
-        else
-                echo "${filename}.sorted exists, use reset script or delete to remake"
         fi
 done
 
@@ -90,8 +84,6 @@ do
 	if [ ! -e $outname ]
 	then
 		samtools depth "$filename" > "$outname"
-	else
-		echo "${outname} exists use reset script or delete this file and run again to remake"
 	fi
 done
 
@@ -101,10 +93,9 @@ do
 	if [ ! -e $filename.len ]
 	then
 		python scripts/countbasesFNA.py $filename
-	else
-		echo "Length already calculated for ${filename}"
 	fi
 done
+
 if [ ! -e refGenomes.len ]
 then
 	cat refGenomes/*.len > refGenomes.len

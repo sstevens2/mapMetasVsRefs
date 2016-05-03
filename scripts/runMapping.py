@@ -26,8 +26,6 @@ def run_mapping(params):
 		cmd = [bbpath, "ref="+reffile,"in="+metafile,"outm="+outfile,"idtag","minid=.8","threads=1","nodisk","-Xmx"+memlimit]
 		#print ' '.join(cmd), os.getpid()
 		subprocess.call(cmd)
-	else:
-		print('Skipping {} as result file already exists, delete to rerun'.format(outfile))
 
 
 if __name__ == '__main__':
