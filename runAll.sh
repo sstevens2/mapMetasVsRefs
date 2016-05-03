@@ -55,7 +55,7 @@ done
 # Getting number of reads in metagenomes
 if [ ! -e metaReads.txt ]
 then
-	for filename in metagenomes/*.fa*; do echo $filename >> metaReads.txt ; grep -c '>' $filename >> metaReads.txt; done
+	for filename in metagenomes/*.f*a; do echo $filename >> metaReads.txt ; grep -c '>' $filename >> metaReads.txt; done
 else
 	echo "Using existing metaRead.txt, delete or reset to remake"
 fi
