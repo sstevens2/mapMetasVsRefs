@@ -29,8 +29,8 @@ else
 fi
 
 # For every combination of reference and metagenome, if the output doesn't exist the mapping will run
-echo python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
-python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
+#echo python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
+python scripts/runMapping.py mappingCombos.txt $bbpath
 
 #Parsing the PID out of the results
 for filename in mappingResults/*.bam
