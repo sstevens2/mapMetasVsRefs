@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#nohup ./runAll.sh threads(default=10) memlimit(default=4g) > $(echo $(date +%Y%m%d_%H%M%S))_nohup.log 2> $(echo $(date +%Y%m%d_%H%M%S))_nohup.err &
+#Usage: ./runAll.sh threads(default=10) memlimit(default=4g) minID(default=.8)
+# Some testing with commands from testing with nohup
 # nohup bash runAll.sh 20 4g > $(echo $(date +%Y%m%d_%H%M%S))_nohup.log 2> $(echo $(date +%Y%m%d_%H%M%S))_nohup.err &
 bbpath=/bbmap/bbmap.sh
 
@@ -30,7 +31,7 @@ fi
 
 # For every combination of reference and metagenome, if the output doesn't exist the mapping will run
 echo python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
-python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'}
+python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'} ${3-'.8'}
 
 #Parsing the PID out of the results
 for filename in mappingResults/*.bam
