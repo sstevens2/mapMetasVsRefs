@@ -18,6 +18,9 @@ This pipeline calculates the coverage and ANI for each metagenome included to ea
 - Samtools
 - BBMap
 - Python 2.7
+- Python Modules:
+	- multiprocessing
+	- pandas
 
 ### Setup
 To set up the directory structure run
