@@ -22,6 +22,6 @@ with open(filename) as f:
 with open(outname,'w') as outfile:
     for line in pidfile:
         pid=line.split('YI:f:')[1]
-        ref,_,meta=filename.split('-')
+        ref,meta=filename.split('-vs-')
         meta=os.path.splitext(meta)[0]
         outfile.write(filename+'\t'+ref+'\t'+meta+'\t'+pid+'\n')
