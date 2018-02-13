@@ -1,6 +1,6 @@
 # coding: utf-8
 import pandas as pd
-import sys, os, re
+import sys, os
 __author__ = "Sarah Stevens"
 __email__ = "sstevens2@wisc.edu"
 
@@ -16,20 +16,20 @@ if len(sys.argv) != 2:
 filename=sys.argv[1]
 aniFileHeader='filename\tref\tmeta\thits\tANI\tmetaReads\tpercentMapped\n'
 regANILine='{}\t{}\t{}\t{}\t{}\t{}\t{}\n'
-ref, _, meta=os.path.basename(filename).split('-')
-meta=os.path.splitext(meta)[0]
+ref, meta = os.path.basename(filename).split('_vs_')
+meta = meta.split('.')[0]
+ref = os.path.splitext(ref)[0]
 
 ## Getting genome size
 metaReadsFile = open('metaReads.txt','r')
 metaReads = int()
 fdname=False
-outname='ani.txt'
+outname='ani_{}vs{}.txt'.format(ref,meta)
 for line in metaReadsFile:
-	if re.search(meta, line) and fdname==False:
-		fdname=True
-	elif fdname==True:
-		metaReads=int(line)
-		fdname=False
+	if meta in line:
+		metaReads=int(line.split(' ')[1])
+		break
+metaReadsFile.close()
 
 if os.stat(filename).st_size == 0: #Checking to see if file is empty (which would happen if no reads recruited)
 	if os.path.exists(outname):
