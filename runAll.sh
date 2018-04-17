@@ -37,7 +37,7 @@ python scripts/runMapping.py mappingCombos.txt $bbpath ${1-'10'} ${2-'4g'} ${3-'
 for filename in mappingResults/*.bam
 do
         outname="${filename%.*}".pid
-        if [  ! -e $outname ] && [[ $filename != *.sorted.bam ]]
+        if [  ! -e $outname ] && [[ $filename != "*.sorted.bam" ]]
         then
                 samtools view $filename | grep 'YI:f:' > $outname
         fi
@@ -74,9 +74,9 @@ fi
 # Making depth files for each
 for filename in mappingResults/*.bam
 do
-        if [ ! -e $filename.sorted.bam ] && [[ $filename != *.sorted.bam ]]
+        if [ ! -e $filename.sorted.bam ] && [[ $filename != "*.sorted.bam" ]]
         then
-                samtools sort $filename $filename.sorted
+                samtools sort $filename  -o $filename.sorted
         fi
 done
 
