@@ -55,7 +55,9 @@ done
 # Getting number of reads in metagenomes, Requires fastq!!!
 if [ ! -e metaReads.txt ]
 then
-	for filename in metagenomes/*.fastq; do echo $filename >> metaReads.txt ; awk '{s++}END{print FILENAME,s/4}' $filename >> metaReads.txt; done
+	for filename in metagenomes/*.fastq; do awk '{s++}END{print FILENAME,s/4}' $filename >> metaReads.fastq.txt; done
+	for filename in metagenomes/*.f*a; do echo $filename $(grep -c '>' $filename) >> metaReads.fasta.txt; done
+	cat metaReads.fastq.txt metaReads.fasta.txt > metaReads.txt
 else
 	echo "Using existing metaRead.txt, delete or reset to remake"
 fi
