@@ -16,7 +16,7 @@ fi
 # Make list of all files ending in .f*a metagenomes directory
 if [ ! -e metagenomeList.txt ]
 then
-	ls metagenomes/*.f*a > metagenomeList.txt
+	ls metagenomes/*.f* > metagenomeList.txt
 else
 	echo "Using existing metagenomeList, use reset script or delete this file and run again to remake"
 fi
