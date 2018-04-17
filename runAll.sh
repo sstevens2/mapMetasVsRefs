@@ -88,7 +88,7 @@ do
 done
 
 ## Getting size of genomes
-for filename in refGenomes/*.fna
+for filename in refGenomes/*.f*a
 do
 	if [ ! -e $filename.len ]
 	then
