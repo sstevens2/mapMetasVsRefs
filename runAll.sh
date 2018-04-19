@@ -76,7 +76,7 @@ for filename in mappingResults/*.bam
 do
         if [ ! -e $filename.sorted.bam ] && [[ $filename != "*.sorted.bam" ]]
         then
-                samtools sort $filename $filename.sorted
+                samtools sort $filename -o $filename.sorted
         fi
 done
 
