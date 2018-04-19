@@ -1,5 +1,5 @@
 ## Mapping Oligotrophic Metagenomes to Reference Genomes
-Sarah Stevens, Elizabeth McDaniel, Matthew Wolff   
+[Sarah Stevens](https://github.com/sstevens2), [Elizabeth McDaniel](https://github.com/elizabethmcd), [Matthew Wolff](https://github.com/MatthewWolff)   
 
 This pipeline calculates the coverage and ANI for each metagenome included to each reference genome  
 
