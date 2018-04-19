@@ -16,7 +16,7 @@ if len(sys.argv) != 2:
 filename=sys.argv[1]
 aniFileHeader='filename\tref\tmeta\thits\tANI\tmetaReads\tpercentMapped\n'
 regANILine='{}\t{}\t{}\t{}\t{}\t{}\t{}\n'
-ref, meta = os.path.basename(filename).split('_vs_')
+ref, meta = os.path.basename(filename).split('-vs-')
 meta = meta.split('.')[0]
 ref = os.path.splitext(ref)[0]
 
