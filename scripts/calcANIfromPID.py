@@ -27,7 +27,7 @@ fdname=False
 outname='ani_{}vs{}.txt'.format(ref,meta)
 for line in metaReadsFile:
 	if meta in line:
-		metaReads=int(line.split(' ')[1])
+		metaReads=int(line.split(' ')[1].rstrip())
 		break
 metaReadsFile.close()
 
